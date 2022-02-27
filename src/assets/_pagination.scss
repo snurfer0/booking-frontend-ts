@@ -1,0 +1,27 @@
+.page-numbers-container {
+	display: flex;
+	justify-content: center;
+}
+
+.current-page-item {
+	margin: 10px;
+	border: solid;
+	border-radius: 5px;
+	border-color: grey;
+	border-width: 1px;
+	padding: 10px;
+	color: grey;
+}
+
+.page-button {
+    margin: 5px;
+    margin-top: 13px;
+    width: 60px;
+    height: 35px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+	border-color: grey;
+	color: grey;
+	cursor: pointer;
+}
