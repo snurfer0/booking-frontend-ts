@@ -1,81 +1,89 @@
-import React from 'react';
-import { Booking as BookingType } from '../../store/bookings/types';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Booking as BookingType } from '../../store/bookings/types';
 import {
+	formatDate,
+	formatUserEmailList,
 	getDate,
 	getMonthShort,
 	getTime,
-	formatDate,
-	formatUserEmailList,
 } from '../../utils/_formatters';
 
 interface Props {
-    booking: BookingType;
-    onDeleteBooking: (id: number) => void;
+	booking: BookingType;
+	onDeleteBooking: (id: number) => void;
 }
 
 const Booking: React.FC<Props> = ({ booking, onDeleteBooking }) => {
 	return (
-		<article className='card fl-left'>
-			<section className='date'>
-				<time>
-					<span>{getDate(booking.event.startTime)}</span>
-					<span>{getMonthShort(booking.event.startTime)}</span>
-				</time>
-			</section>
-			<section className='card-cont'>
-				<div className='card-title'>
-					<h3>
-						#{booking.id} {booking.event.title},{' '}
-						{booking.address.venueName}
-					</h3>
-					<h3>{booking.totalPrice}$</h3>
+		<div className='col-xl-6'>
+			<div className='d-flex flex-row card'>
+				<div className='date col-3'>
+						<time>
+							<span>{getDate(booking.event.startTime)}</span>
+							<span>
+								{getMonthShort(booking.event.startTime)}
+							</span>
+						</time>
+						<p>
+							<a
+								href='#'
+								data-tooltip={formatUserEmailList(
+									booking.event.users,
+								)}
+							>
+								See who's comming
+							</a>
+						</p>
 				</div>
-				<p className='description'>{booking.event.description}</p>
-				<p className='host'>HOST: {booking.user.email}</p>
-
-				<div className='even-date'>
-					<i className='fa fa-calendar'></i>
-					<time className='time-container'>
-						<span>
-							<h2>{formatDate(booking.event.startTime)}</h2>
-						</span>
-						<span>
-							<h2>
+				<div className='card-cont col-9'>
+					<div className='card-title'>
+						<h3>
+							#{booking.id} {booking.event.title},{' '}
+							{booking.address.venueName}
+						</h3>
+					</div>
+					<div className='description'>
+						{booking.event.description}
+					</div>
+					<div className='host'>HOST: {booking.user.email}</div>
+					<div className='even-date'>
+						<i className='fa fa-calendar'></i>
+						<time>
+							<p>{formatDate(booking.event.startTime)}</p>
+							<p>
 								{getTime(booking.event.startTime)} -{' '}
 								{getTime(booking.event.endTime)}
-							</h2>
-						</span>
-					</time>
-				</div>
-				<p>
-					<a
-						href='#'
-						data-tooltip={formatUserEmailList(booking.event.users)}
-					>
-						See who's comming
-					</a>
-				</p>
-				<div className='even-info'>
-					<FontAwesomeIcon
-						className='locationDotIcon'
-						icon={faLocationDot}
-					/>
-					{booking.address.address}&nbsp; {booking.address.zip}&nbsp;{' '}
-					{booking.address.city}
-					{'-'}
-					{booking.address.country}
-				</div>
+							</p>
+						</time>
+					</div>
 
-				<button
-					className=' grow_on_hover'
-					onClick={() => onDeleteBooking(booking.id)}
-				>
-					Delete
-				</button>
-			</section>
-		</article>
+					<div className='row'>
+						<div className='even-info col-7 my-auto'>
+							<FontAwesomeIcon
+								className='locationDotIcon'
+								icon={faLocationDot}
+							/>
+							{booking.address.address}&nbsp;{' '}
+							{booking.address.zip}
+							&nbsp; {booking.address.city}
+							{'-'}
+							{booking.address.country}
+						</div>
+						<div className='col-1'></div>
+						<div className='col-4'>
+							<button
+								className='grow_on_hover'
+								onClick={() => onDeleteBooking(booking.id)}
+							>
+								Delete
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	);
 };
 

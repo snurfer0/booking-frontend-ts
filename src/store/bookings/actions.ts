@@ -57,7 +57,7 @@ export const fetchBookings: AppThunk =
 			if (response && response.status === 200) {
 				return dispatch({
 					type: BookingActionTypes.FETCH_SUCCESS,
-					payload: { data: response.data.bookings, page: page },
+					payload: { data: response.data.bookings, page: page, pages: response.data.pages },
 				});
 			} else {
 				return dispatch({

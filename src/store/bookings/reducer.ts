@@ -3,9 +3,10 @@ import { BookingActionTypes, BookingState, Booking } from './types';
 
 const initialState: BookingState = {
 	data: [],
-	currentPage: 1,
 	loading: false,
 	errors: undefined,
+	currentPage: 1,
+	totalPages: undefined,
 };
 
 const reducer: Reducer<BookingState> = (
@@ -22,6 +23,7 @@ const reducer: Reducer<BookingState> = (
 				loading: false,
 				data: action.payload.data,
 				currentPage: action.payload.page,
+				totalPages: action.payload.pages,
 			};
 		case BookingActionTypes.DELETE_BOOKING:
 			return {

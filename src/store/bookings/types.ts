@@ -35,7 +35,8 @@ export enum BookingActionTypes {
 
 export interface BookingState {
 	readonly data: Booking[];
-	readonly currentPage: number;
 	readonly loading: boolean;
 	readonly errors?: string;
+	readonly currentPage: number;
+	readonly totalPages?: number;
 }
